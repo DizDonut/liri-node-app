@@ -65,6 +65,14 @@ function movieThis(movieName){
   }); //end ombdapi request
 }; //end movieThis function
 
+/*
+  spotifyThis function accepts one argument and utilizes the spotify search API to pull
+  back details of a given song Title
+
+  @param songName = the value assigned to the songInput variable from user input via
+    process.argv
+*/
+
 function spotifyThis(songName){
   var id = keys.spotifyKeys.id;
   var sec = keys.spotifyKeys.secret;
@@ -76,20 +84,25 @@ function spotifyThis(songName){
 
   spotify.search({type: "track", query: songName}, function(err, data) {
     if (err) {
-      return console.log('Error occured: ' + err);
+      return console.log(`Error occured: ${err}`);
     }
+    //declare objData variable and assign the first three steps of the object
     var objData = data.tracks.items;
 
+    //loop through the objData and assign values as noted below
     for (var i = 0; i < objData.length; i++) {
+      //declare and initialize values within the track object
       var song = objData[i].name;
-      var artists = objData[i].artists[i].name;
       var album = objData[i].album.name;
       var linky = objData[i].preview_url;
+      var artists = objData[i].artists[0].name;
+
+      //log out results
       console.log(`\nArtist Name: ${artists}`);
       console.log(`Song: ${song}`);
       console.log(`Spotify Link: ${linky}`);
       console.log(`Album Name: ${album}\n`);
     }
-  }); //end spotify search
 
+  }); //end spotify search
 };//end spotifyThis function
