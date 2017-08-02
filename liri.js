@@ -1,5 +1,6 @@
 //set items that we need to require
 var fs = require("fs");
+var inquire = require("inquirer")
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api')
 var request = require("request");
@@ -24,9 +25,11 @@ if(userInputType === "movie-this"){
       movieInput += nodeArgs[i];
     }
   }
-  //call movieThis function
-  movieThis(movieInput);
-} else if (userInputType === "spotify-this-song") {
+
+    //call movieThis function
+    movieThis(movieInput);
+
+  } else if (userInputType === "spotify-this-song") {
   var songInput = "";
   var nodeArgs = process.argv;
 
